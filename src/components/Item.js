@@ -1,3 +1,9 @@
 import React from 'react'
 
-export default () => <div></div>
+const Item = ({ cost, description }) => (
+  <li>
+    ${cost} - {description}
+  </li>
+)
+
+export default Item
