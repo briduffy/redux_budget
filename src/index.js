@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components'
 const theme = {
   blue: '#B0E2FF',
   green: '#D6FFD6',
+  red: '#E5FFE5',
 }
 
 ReactDOM.render(
