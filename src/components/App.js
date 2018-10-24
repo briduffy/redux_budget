@@ -1,31 +1,20 @@
 import React from 'react'
-import Ledger from './Ledger'
-import WishList from './WishList'
-import LedgerForm from './LedgerForm'
-import WishListForm from './WishListForm'
-import { Flex } from './Shared'
-import { connect } from 'react-redux'
-import { getEntries } from '../reducers/ledger'
+import { Switch, Route } from 'react-router-dom'
+import { ProtectedRoute } from '@devpoint/dps-react-kit'
+import FetchUser from './FetchUser'
+import Home from './Home'
+import Auth from './Auth'
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(getEntries())
-  }
+const App = () => (
+  <>
+    <FetchUser>
+      <Switch>
+        <ProtectedRoute exact path="/" component={Home}/>
+        <Route exact path="/login" render={ (props) => <Auth {props} type="Login"/>}/>
+        <Route exact path="/register" render= { (props) => <Auth {...props} type="Register"/>}/>
+      </Switch>
+    </FetchUser>
+  </>
+)
 
-  render() {
-    return (
-      <div>
-        <Flex alignItems="stretch">
-          <LedgerForm />
-          <WishListForm />
-        </Flex>
-        <Flex justifyContent="space-around">
-          <Ledger />
-          <WishList />
-        </Flex>
-      </div>
-    )
-  }
-}
-
-export default connect()(App)
+export default App
