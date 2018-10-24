@@ -13,8 +13,8 @@ class FetchUser extends Component {
     } else {
       if (this.checkLocalToken()) {
         axios.get('/api/auth/validate_token')
-          .then( async res => {
-            await dispatch(login(res.data.data))
+          .then( res => {
+            dispatch(login(res.data.data))
             this.loaded()
           }).catch( (err) => {
             this.loaded() 
