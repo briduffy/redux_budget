@@ -4,22 +4,22 @@ const LOGIN = 'LOGIN'
 const REGISTER = 'REGISTER'
 const LOGOUT = 'LOGOUT'
 
-export const login = (credentials, cb) => {
+export const login = (credentials, history) => {
   return (dispatch) => {
     axios.post('/api/auth/sign_in', credentials)
      .then( res => {
        dispatch({ type: LOGIN, user: res.data.data })
-       cb()
+       history.push('/')
     })
   }
 }
 
-export const register = (credentials, cb) => {
+export const register = (credentials, history) => {
   return (dispatch) => {
     axios.post('/api/auth', credentials)
      .then( res => {
        dispatch({ type: REGISTER, user: res.data.data })
-       cb()
+       history.push('/')
      })
   }
 }
