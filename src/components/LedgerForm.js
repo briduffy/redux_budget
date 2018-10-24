@@ -1,18 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addEntry } from '../reducers/ledger'
 import {
   Input,
   Button,
   Flex,
   FormBox,
 } from './Shared'
-import { connect } from 'react-redux'
-import { addEntry } from '../reducers/ledger'
 
 class LedgerForm extends React.Component {
   defaultState = {
     amt: '',
     description: '',
-    type: 'Debit',
+    entry_type: 'Debit',
   }
 
   state = this.defaultState
@@ -23,23 +23,26 @@ class LedgerForm extends React.Component {
     this.setState(this.defaultState)
   }
 
-  handleChange =(e) => {
+  handleChange = (e) => {
     const { value, name } = e.target
     this.setState({ [name]: value })
   }
 
   render() {
-    const { amt, description, type } = this.state
-    return(
+    const { amt, description, entry_type } = this.state
+    return (
       <FormBox onSubmit={this.handleSubmit}>
-        <Flex alignItems="stretch" direction="column">
+        <Flex
+          alignItems="stretch"
+          direction="column"
+        >
           <Input
             type="number"
             min="0"
             name="amt"
             value={amt}
             onChange={this.handleChange}
-            placeholder="Amount"
+            placeholder="Amt"
             required
           />
           <Input
@@ -48,7 +51,11 @@ class LedgerForm extends React.Component {
             value={description}
             onChange={this.handleChange}
           />
-          <select name="type" onChange={this.handleChange} value={type}>
+          <select
+            name="entry_type"
+            onChange={this.handleChange}
+            value={entry_type}
+          >
             <option>Debit</option>
             <option>Credit</option>
           </select>

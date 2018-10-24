@@ -19,7 +19,7 @@ class Items extends React.Component {
     const { ledger } = this.props
     return ledger.reduce( (total, entry) => {
       const amt = parseFloat(entry.amt)
-      if (entry.type === 'Debit')
+      if (entry.entry_type === 'Debit')
         return total - amt
       return total + amt
     }, 0)
@@ -30,9 +30,9 @@ class Items extends React.Component {
     const { show } = this.state
     switch(show) {
       case 'Want':
-        return items.filter( i => i.type === 'Want' )
+        return items.filter( i => i.item_type === 'Want' )
       case 'Need':
-        return items.filter( i => i.type === 'Need' )
+        return items.filter( i => i.item_type === 'Need' )
       case 'Affordable':
         const total = this.ledgerValue()
         return items.filter( i => i.cost <= total )
@@ -60,7 +60,7 @@ class Items extends React.Component {
           )
         }
         <List>
-          { this.filterList().map( (item, i) => <Item key={i} {...item} /> ) }
+          { this.filterList().map( (item) => <Item key={item.id} {...item} /> ) }
         </List>
       </Fragment>
     )
@@ -75,4 +75,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Items)
-

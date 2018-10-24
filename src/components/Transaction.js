@@ -15,17 +15,17 @@ const DeleteButton = styled(Button)`
 `
 
 const Transaction = ({ 
-  type,
+  entry_type,
   amt,
   description,
-  index,
+  id,
   dispatch,
 }) => (
-  <Item type={type}>
+  <Item type={entry_type}>
     ${amt}
     { description && ` - ${description}` }
     <DeleteButton
-      onClick={() => dispatch(removeEntry(index))}
+      onClick={() => dispatch(removeEntry(id))}
     >
       Remove
     </DeleteButton>

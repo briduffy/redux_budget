@@ -1,18 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addItem } from '../reducers/items'
 import {
   Input,
   Button,
   Flex,
   FormBox,
 } from './Shared'
-import { connect } from 'react-redux'
-import { addItem } from '../reducers/items'
 
 class WishListForm extends React.Component {
   defaultState = {
     cost: '',
     description: '',
-    type: 'Want',
+    item_type: 'Want',
   }
 
   state = this.defaultState
@@ -23,16 +23,19 @@ class WishListForm extends React.Component {
     this.setState(this.defaultState)
   }
 
-  handleChange =(e) => {
+  handleChange = (e) => {
     const { value, name } = e.target
     this.setState({ [name]: value })
   }
 
   render() {
-    const { cost, description, type } = this.state
-    return(
+    const { cost, description, item_type } = this.state
+    return (
       <FormBox onSubmit={this.handleSubmit}>
-        <Flex alignItems="stretch" direction="column">
+        <Flex
+          alignItems="stretch"
+          direction="column"
+        >
           <Input
             type="number"
             min="0"
@@ -48,7 +51,11 @@ class WishListForm extends React.Component {
             value={description}
             onChange={this.handleChange}
           />
-          <select name="type" onChange={this.handleChange} value={type}>
+          <select
+            name="item_type"
+            onChange={this.handleChange}
+            value={item_type}
+          >
             <option>Want</option>
             <option>Need</option>
           </select>

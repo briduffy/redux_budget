@@ -1,8 +1,22 @@
+import axios from 'axios'
+
+const ENTRIES = 'ENTRIES'
 const ADD_ENTRY = 'ADD_ENTRY'
 const REMOVE_ENTRY = 'REMOVE_ENTRY'
 
+
+export const getEntries = () => {
+  return (dispatch) => {
+    axios.get('/api/entries')
+      .then(res => dispatch({ type: ENTRIES, entries: res.data }))
+  }
+}
+
 export const addEntry = (entry) => {
-  return { type: ADD_ENTRY, entry }
+  return (dispatch) => {
+    axios.post('/api/entries', {entry})
+    .then( res => dispatch({ type: ADD_ENTRY, entry }))
+  }   
 }
 
 export const removeEntry = (index) => {

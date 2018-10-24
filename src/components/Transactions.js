@@ -10,7 +10,7 @@ const List = styled.ul`
 const calcTotal = (ledger) => {
   return ledger.reduce( (total, entry) => {
     const amt = parseFloat(entry.amt)
-    if (entry.type === 'Debit')
+    if (entry.entry_type === 'Debit')
       return total - amt
     return total + amt
   }, 0)
@@ -21,7 +21,7 @@ const Transactions = ({ ledger }) => (
     <h1>Ledger</h1>
     <h4>Balance ${ calcTotal(ledger) }</h4>
     <List>
-      { ledger.map( (entry, i) => <Transaction key={i} index={i} {...entry} /> ) }
+      { ledger.map( (entry) => <Transaction key={entry.id} {...entry} /> ) }
     </List>
   </Fragment>
 )

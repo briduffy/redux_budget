@@ -4,6 +4,9 @@ import App from './components/App'
 import { Provider } from 'react-redux'
 import store from './store'
 import { ThemeProvider } from 'styled-components'
+import { initMiddleware } from 'devise-axios'
+
+initMiddleware()
 
 const theme = {
   blue: '#B0E2FF',
@@ -19,4 +22,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 )
-

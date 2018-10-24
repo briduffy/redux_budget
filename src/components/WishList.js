@@ -1,10 +1,20 @@
 import React from 'react'
 import Items from './Items'
+import { connect }  from 'react-redux'
+import { getItems } from '../reducers/items'
 
-const WishList = () => (
-  <div>
-    <Items />
-  </div>
-)
+class WishList extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(getItems())
+  }
 
-export default WishList
+  render() {
+    return (
+      <div>
+        <Items />
+      </div>
+    )
+  }
+}
+
+export default connect()(WishList)

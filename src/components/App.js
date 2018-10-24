@@ -4,19 +4,28 @@ import WishList from './WishList'
 import LedgerForm from './LedgerForm'
 import WishListForm from './WishListForm'
 import { Flex } from './Shared'
+import { connect } from 'react-redux'
+import { getEntries } from '../reducers/ledger'
 
-const App = () => (
-  <div>
-    <Flex alignItems="stretch">
-      <LedgerForm />
-      <WishListForm />
-    </Flex>
-    <Flex justifyContent="space-around">
-      <Ledger />
-      <WishList />
-    </Flex>
-  </div>
-)
+class App extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(getEntries())
+  }
 
-export default App
+  render() {
+    return (
+      <div>
+        <Flex alignItems="stretch">
+          <LedgerForm />
+          <WishListForm />
+        </Flex>
+        <Flex justifyContent="space-around">
+          <Ledger />
+          <WishList />
+        </Flex>
+      </div>
+    )
+  }
+}
 
+export default connect()(App)

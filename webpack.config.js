@@ -7,6 +7,12 @@ const config = {
     filename: "bundle.js"
   },
 
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:3001'
+    }
+  },
+
   module: {
     rules: [
       {
